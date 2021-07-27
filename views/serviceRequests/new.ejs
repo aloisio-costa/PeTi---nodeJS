@@ -1,0 +1,70 @@
+<% layout('/layouts/boilerplate') %>
+    <div class="row">
+        <h1 class="text-center">New Service Request</h1>
+        <div class="col-md-6 offset-md-3">
+            <form action="/serviceRequests" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                <div  class="mb-3">
+                    <label class="form-label" for="petname">Pet Name</label>
+                    <input class="form-control" type="text" id="petname" name="serviceRequest[petname]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+
+                <div  class="mb-3">
+                    <label class="form-label" for="pettype">Pet Type</label>
+                    <input class="form-control" type="text" id="pettype" name="serviceRequest[pettype]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" id="location" name="serviceRequest[location]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+
+                <div  class="mb-3">
+                    <label class="form-label" for="service">Service</label>
+                    <select class="form-control" name="serviceRequest[service]" id="service" required>
+                        <% for(let service of services) {%>
+                            <option value="<%=service%>">
+                                <%=service%>
+                            </option>
+                            <% } %>
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" type="text" id="description" name="serviceRequest[description]" required>
+                    </textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-file custom-file">
+                        <div class="mb-3">
+                            <label for="image" class="form-label custom-file-label">Choose Image(s)</label>
+                            <input class="form-control" type="file" id="image" name="image" multiple
+                             onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0])">
+                          </div>
+                        <img class="img-fluid my-3" id="preview" />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <button class="btn btn-success">Add Request</button>
+                </div>
+            </form>
+            <a href="/serviceRequests">All Request</a>
+        </div>
+    </div>

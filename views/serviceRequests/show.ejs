@@ -1,0 +1,99 @@
+<% layout('/layouts/boilerplate') %>
+    <link rel="stylesheet" href="/stylesheets/stars.css">
+
+    <div class="row">
+        <div class="col-6 border rounded">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                <% request.images.forEach((img, i) => {%> 
+                  <div class="carousel-item <%= i === 0 ? 'active' : ''%> ">
+                    <img src="<%=img.url%> " class="d-block w-100" alt="">
+                  </div>
+                <% }) %> 
+                </div>
+                <% if(request.images.length > 1) { %> 
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+                <% } %> 
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title"><%=request.petname%><p class="text-muted"><%=request.pettype%></p></h5>
+                    <p class="card-text"><%=request.description%></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">by: <%=request.author.username%></li>
+                  <li class="list-group-item text-muted"><%=request.location%></li>
+                  <li class="list-group-item">Requires: <%=request.service%></li>
+                </ul>
+                <% if(currentUser && request.author.equals(currentUser._id)) {%> 
+                <div class="card-body">
+                    <a class="card-link btn btn-info" href="/serviceRequests/<%=request._id%>/edit">Edit</a>
+                    <form class="d-inline" action="/serviceRequests/<%=request._id%>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+                <% }else{ %>
+                <div class="card-body">
+                    <form class="d-inline" action="/serviceRequests/<%=request._id%>/apply?_method=PUT" method="POST">
+                        <button class="btn btn-success">Apply</button>
+                    </form>
+                    <form class="d-inline" action=" ">
+                      <button class="btn btn-info">Contact</button>
+                  </form>
+                </div>
+                <% } %>  
+                <div class="card-footer text-muted">
+                    <a href="/ServiceRequests">Back to Service Requests</a>
+                </div>
+            </div>
+            <div class="mb-3">
+              <div id='map'></div>
+          </div>
+        </div>
+
+        <div class="col-6 ">
+            <h1 class="display-1 h1 text-center fw-normal text-white" style="background-color:rgb(219, 126, 141)">Applicants</h1>
+            <% for(let applicant of request.applicants) {%>
+            <div class="card mb-3">
+                <div class="row">
+                  <div class="col-md-4">
+                    <img src="<%=applicant.images[0].url%>" alt="" class="img-fluid my-3">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title"><%=applicant.title%></h5>
+                      <h6 class="card-subtitle text-muted"><%=applicant.location%></h6>
+                      <p class="card-text"> <%=applicant.description%> </p>
+                      <% if(applicant.reviews) {%> 
+                        <% let AverageRating = Math.round(applicant.reviews.map((review)=> review.rating)
+                        .reduce((previous, current)=> previous+current) / applicant.reviews.length) %>
+                        
+                        <div class="mb-3 position-relative">
+                          <span class="starability-result" data-rating="<%=AverageRating%>">Review Rating</span>                         
+                          <span class="d-inline position-absolute top-50 start-50 translate-middle"><%=applicant.reviews.length%> Reviews</span>
+                        </div>                                                        
+                        <form class="d-inline" action="/petSitters/<%=applicant._id%>">
+                        <button class="btn btn-success" style="background-color:rgb(219, 126, 141)">View Profile</button>
+                    </form>
+                      <% } %> 
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <% } %> 
+        </div>
+    </div>
+
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+        const request = <%- JSON.stringify(request)%>;
+    </script>
+    <script src="/javascripts/showPageMapRequests.js"></script>

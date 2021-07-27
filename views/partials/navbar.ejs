@@ -1,0 +1,45 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color:rgb(219, 126, 141)">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">PeTi's</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">      
+        <!-- <h6><a class="nav-link" href="/">Home</a></h6>
+        <h6><a class="nav-link" href="/aboutUs">About Us</a></h6>      
+        <h6><a class="nav-link" href="/serviceRequests">Service Requests</a></h6>
+        <h6><a class="nav-link" href="/serviceRequests/new">Create Request</a></h6>
+        <h6><a class="nav-link" href="/petSitters">PeTi's Lovers</a></h6>
+        <h6><a class="nav-link" href="/petSitters/new">Create Profile</a></h6> -->
+        <% if(!currentUser) {%>
+          <h6><a class="nav-link" href="/">Home</a></h6>
+          <h6><a class="nav-link" href="/aboutUs">About Us</a></h6>      
+          <h6><a class="nav-link" href="/serviceRequests">Service Requests</a></h6>
+          <h6><a class="nav-link" href="/petSitters">PeTi's Lovers</a></h6>
+        <% }else if(currentUser && currentUser.userType === 'Request Service') {%> 
+          <h6><a class="nav-link" href="/">Home</a></h6>
+          <h6><a class="nav-link" href="/aboutUs">About Us</a></h6>      
+          <h6><a class="nav-link" href="/serviceRequests">Service Requests</a></h6>
+          <h6><a class="nav-link" href="/serviceRequests/new">Create Request</a></h6>
+          <h6><a class="nav-link" href="/petSitters">PeTi's Lovers</a></h6>
+        <% } else if(currentUser && currentUser.userType === 'Pet Sit') {%> 
+          <h6><a class="nav-link" href="/">Home</a></h6>
+          <h6><a class="nav-link" href="/aboutUs">About Us</a></h6>      
+          <h6><a class="nav-link" href="/serviceRequests">Service Requests</a></h6>
+          <h6><a class="nav-link" href="/petSitters">PeTi's Lovers</a></h6>
+          <h6><a class="nav-link" href="/petSitters/new">Create Profile</a></h6>
+        <% } %> 
+      </div>
+      <div class="navbar-nav ms-auto">
+        <% if(!currentUser) {%>
+          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link" href="/register">Register</a>
+          <% } else {%>
+            <a class="nav-link" href="/logout">logout</a>
+          <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

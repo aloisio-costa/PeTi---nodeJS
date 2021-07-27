@@ -1,0 +1,30 @@
+<% layout('/layouts/boilerplate') %>
+    <h1 style="color:rgb(219, 126, 141)">PeTi Lovers</h1>
+    <div class="container mb-3 position-relative">
+        <form class="position-absolute bottom-0 end-0" action="/petSitters/new">
+            <button class="btn btn-success btn-lg ">Create Profile</button>
+        </form>           
+    </div>
+    <% for (let petSitter of petSitters) {%>
+        <div class="card mb-3 border rounded border-secondary">
+            <div class="row">
+                <div class="col-md-4">
+                    <%if(petSitter.images.length) {%> 
+                    <img class="img-fluid" alt="cant display img" src="<%=petSitter.images[0].url%>">
+                    <% }else { %>
+                        <img class="img-fluid" alt=" " src="https://res.cloudinary.com/drg2ftveg/image/upload/v1619382290/YelpCamp/k76brxpyhhg7rz9yvsvr.jpg">
+                    <% } %> 
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= petSitter.title%></h5>
+                        <p class="card-text"><%= petSitter.description.substring(0, 200)%>...</p>          
+                        <p class="card-text">
+                            <small class="text-muted"><%= petSitter.location%></small>
+                        </p>
+                        <a class="btn btn-primary" style="background-color:rgb(219, 126, 141)" href="/petSitters/<%= petSitter._id%>">View <%= petSitter.username%> Profile </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>

@@ -1,0 +1,35 @@
+<% layout('/layouts/boilerplate') %>
+<h1 style="color:rgb(219, 126, 141)">PeTi Requests</h1>
+        <div class="container mb-3 position-relative">
+            <form class="position-absolute bottom-0 end-0" action="/serviceRequests/new">
+                <button class="btn btn-success btn-lg ">Create Request</button>
+            </form>           
+        </div>
+        <% for (let request of requests) {%>
+            <div class="card mb-3 border rounded border-secondary">
+                <div class="row">
+                    <div class="col-md-4">
+                        <%if(request.images.length) {%> 
+                        <img class="img-fluid" alt="cant display img" src="<%=request.images[0].url%>">
+                        <% }else { %>
+                            <img class="img-fluid" alt=" " src="https://res.cloudinary.com/drg2ftveg/image/upload/v1619382290/YelpCamp/k76brxpyhhg7rz9yvsvr.jpg">
+                        <% } %> 
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= request.pettype%> - <%= request.petname %> </h5>
+                            <p class="card-text"><%= request.description%></p>
+                            <p class="card-text">
+                                <small class="text-muted"><%= request.location%></small>
+                            </p>
+                            <a class="btn btn-primary" style="background-color:rgb(219, 126, 141)" href="/serviceRequests/<%= request._id%>">View <%= request.petname%> Request </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+
+
+<script>
+    const requests = {features: <%- JSON.stringify(requests)%>}
+</script>

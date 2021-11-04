@@ -10,7 +10,7 @@ Soon..
 
 ### Find Pet Sitters Page
 Page you will find a list of pet Sitters and can click them to see their profile
-Soon
+Image coming Soon
 
 ### Profile page
 Page where you can see the pet sitter profile, see his/her reviews and leave a review yourself.
@@ -23,8 +23,6 @@ Page where you see your requests, edit and make new ones
 **You need the api running and the dataBase mongoose connected in order to nagivate in the website**
 
 # What did I use?
-The project client side was written in React with .NET/C# API. 
-
 **NodeJS - back-end**
 - Express framework
 - DataBase MongoDB 
@@ -32,5 +30,9 @@ The project client side was written in React with .NET/C# API.
 - Postman for testing
 
 **Front-end**
--Ejs templating language
+- Ejs templating language
+
+**Services** 
+- Cloudinary 
+- MapBox
 

@@ -31,6 +31,6 @@ The project client side was written in React with .NET/C# API.
 - Mongoose to connect to the Data Base
 - Postman for testing
 
-**front-end**
+**Front-end**
 -Ejs templating language
 
